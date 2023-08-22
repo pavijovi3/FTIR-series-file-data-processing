@@ -153,31 +153,41 @@ def exit_application():
 # Create the main GUI window
 window = tk.Tk()
 window.title("FTIR Data Processing")
-window.geometry("300x230")
+window.geometry("460x300")
 
-# Create a frame to contain the buttons and align it to the left
+# Create a frame for the header
+header_frame = tk.Frame(window, padx=20, pady=20)
+header_frame.pack()
+
+# Create a label for the header
+header_label = tk.Label(header_frame, text="FTIR Data Processing (part 1)", font=("Helvetica", 16, "bold"))
+header_label.pack(anchor="w")
+
+# Create a frame for the content
 button_frame = tk.Frame(window, padx=20, pady=20)
-button_frame.pack(anchor="w")  # Use "w" to anchor (justify) the frame to the left
+button_frame.pack()
 
-# Create buttons with some styling
-button_style = {
-    "font": ("Helvetica", 14),
-    "width": 30,
-    "height": 2,
-    "bd": 2,  # Border thickness
-    "relief": "solid",  # Border style
-}
+# Step 1 Section
+label_step1 = tk.Label(button_frame, text="Step 1: Rename the header with a CV voltage range.")
+label_step1.pack(anchor="w")
 
-# Create buttons for each functionality
-rename_columns_button = tk.Button(window, text="Step 1: Rename Columns", command=rename_columns, bg="light blue")
-process_background_data_button = tk.Button(window, text="Step 2: Reprocess Background", command=bg_processing,
+rename_columns_button = tk.Button(button_frame, text="Rename Columns", command=rename_columns, bg="light blue")
+rename_columns_button.pack(pady=5, anchor="w")
+
+# Step 2 Section
+label_step2 = tk.Label(button_frame, text="Step 2: Change the background/reference spectrum with a chosen column.")
+label_step2.pack(anchor="w")
+
+process_background_data_button = tk.Button(button_frame, text="Reprocess Background", command=bg_processing,
                                            bg="light blue")
-exit_button = tk.Button(window, text="Exit Application", command=exit_application, bg="red")
+process_background_data_button.pack(pady=5, anchor="w")
 
-# Pack the buttons with some spacing and justify to the left
-rename_columns_button.pack(pady=10, anchor="w")
-process_background_data_button.pack(pady=10, anchor="w")
-exit_button.pack(pady=10, anchor="w", )
+# Exit Section
+exit_label = tk.Label(button_frame, text="To quit, click below")
+exit_label.pack(anchor="w")
+
+exit_button = tk.Button(button_frame, text="Exit Application", command=exit_application, bg="red")
+exit_button.pack(pady=10, anchor="w")
 
 # Start the tkinter event loop
 window.mainloop()
